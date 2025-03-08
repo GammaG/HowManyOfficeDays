@@ -1,4 +1,4 @@
-package com.timetracker;
+package com.howManyOfficeDays;
 
 import org.junit.Test;
 
