@@ -13,6 +13,7 @@ public class SchemaGenerator {
         Entity trackingModel = schema.addEntity("TrackingModel"); // Table name
         trackingModel.addIdProperty(); // id is the primary key
         trackingModel.addIntProperty("officeDays");
+        trackingModel.addIntProperty("officeDaysLeft");
         trackingModel.addIntProperty("workingDays");
         trackingModel.addIntProperty("percentageGoal");
         trackingModel.addIntProperty("daysLeft");

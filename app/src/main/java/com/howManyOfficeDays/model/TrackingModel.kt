@@ -13,6 +13,9 @@ class TrackingModel {
     @Property(nameInDb = "officeDays")
     var officeDays: Int = 0
 
+    @Property(nameInDb = "officeDaysLeft")
+    var officeDaysleft: Int = 0
+
     @Property(nameInDb = "workingDays")
     var workingDays: Int = 0
 
