@@ -1,61 +1,65 @@
 package com.howManyOfficeDays
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.howManyOfficeDays.controller.TimeController
-import com.howManyOfficeDays.model.DaoMaster
-import com.howManyOfficeDays.model.DaoMaster.DevOpenHelper
-import com.howManyOfficeDays.model.DaoSession
+import com.howManyOfficeDays.greendao.DaoMaster
+import com.howManyOfficeDays.greendao.DaoSession
 
 class MainActivity : AppCompatActivity() {
-    private var timeEditText: EditText? = null
-    private var addHourButton: Button? = null
-    private var reduceHourButton: Button? = null
-    private var addQuarterButton: Button? = null
-    private var reduceQuarterButton: Button? = null
-    private var addFiveMinutesButton: Button? = null
-    private var reduceFiveMinutesButton: Button? = null
-    private var mDaoSession: DaoSession? = null
-    private var timeController: TimeController? = null
 
+    private var addOfficeDayBtn: Button? = null
+    private var editOfficeDays: EditText? = null
+    private var reduceOfficeDayBtn: Button? = null
+    private var daysLeftTextView: TextView? = null
+    private var goalTextView: TextView? = null
+    private var addWorkingDayBtn: Button? = null
+    private var editWorkingDays: EditText? = null
+    private var reduceWorkingDayBtn: Button? = null
+    private var addPercentageBtn: Button? = null
+    private var editPercentage: EditText? = null
+    private var reducePercentage: Button? = null
+    private var resetBtn: Button? = null
+
+    private var mDaoSession: DaoSession? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       // initializeUIElements()
-       // setUpGreenDaoSession()
-       // setUpController()
+        initializeUIElements()
+        setUpGreenDaoSession()
+        setUpController()
     }
 
     private fun initializeUIElements() {
-       // timeEditText = findViewById(R.id.timeEditText)
-        // addHourButton = findViewById(R.id.addHourButton)
-        // reduceHourButton = findViewById(R.id.reduceHourButton)
-        // addQuarterButton = findViewById(R.id.addQuarterButton)
-        //reduceQuarterButton = findViewById(R.id.reduceQuarterButton)
-        //reduceFiveMinutesButton = findViewById(R.id.reduceFiveMinutesButton)
-        //addFiveMinutesButton = findViewById(R.id.addFiveMinutesButton)
+        addOfficeDayBtn = findViewById(R.id.addOfficeDayBtn)
+        editOfficeDays = findViewById(R.id.editOfficeDays)
+        reduceOfficeDayBtn = findViewById(R.id.reduceOfficeDayBtn)
+        daysLeftTextView = findViewById(R.id.daysLeftTextView)
+        goalTextView = findViewById(R.id.goalTextview)
+        addWorkingDayBtn = findViewById(R.id.addWorkingDayBtn)
+        editWorkingDays = findViewById(R.id.editWorkingDays)
+        reduceWorkingDayBtn = findViewById(R.id.reduceWorkingDayBtn)
+        addPercentageBtn = findViewById(R.id.addPercentageBtn)
+        editPercentage = findViewById(R.id.editPercentage)
+        reducePercentage = findViewById(R.id.reducePercentage)
+        resetBtn = findViewById(R.id.resetBtn)
     }
 
     private fun setUpGreenDaoSession() {
         try {
-            mDaoSession = DaoMaster(
-                DevOpenHelper(this, "overtime.db").writableDb
+            var mDaoSession = DaoMaster(
+                DaoMaster.DevOpenHelper(this, "officeDays.db").writableDb
             ).newSession()
         } catch (ignored: Exception) {
         }
     }
 
     private fun setUpController() {
-        timeController = mDaoSession?.let { timeEditText?.let { it1 -> TimeController(it, it1) } }
-        addHourButton!!.setOnClickListener { timeController!!.addOneHour() }
-        reduceHourButton!!.setOnClickListener { timeController!!.reduceOneHour() }
-        addQuarterButton!!.setOnClickListener { timeController!!.addQuarter() }
-        reduceQuarterButton!!.setOnClickListener { timeController!!.reduceQuarter() }
-        addFiveMinutesButton!!.setOnClickListener { timeController!!.addFiveMinutes() }
-        reduceFiveMinutesButton!!.setOnClickListener { timeController!!.reduceFiveMinutes() }
+
     }
+
+
 }

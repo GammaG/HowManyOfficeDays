@@ -1,0 +1,22 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral() // ✅ Add this to fetch dependencies
+}
+
+dependencies {
+    implementation 'org.greenrobot:greendao-generator:3.3.0' // ✅ Code generator
+}
+
+// Add the custom task for generating GreenDAO schema
+task generateGreenDaoSchema(type: JavaExec) {
+    main = 'com.howManyOfficeDays.SchemaGenerator' // The class that generates the GreenDAO schema
+    classpath = sourceSets.main.runtimeClasspath // Ensure it's using the correct runtime classpath
+}

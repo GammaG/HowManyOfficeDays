@@ -8,3 +8,5 @@ plugins {
 }
 rootProject.name='HowManyOfficeDays'
 include ':app'
+include ':app:lib'
+include ':GreenDaoGenerator'
