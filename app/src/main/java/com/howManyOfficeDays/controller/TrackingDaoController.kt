@@ -170,6 +170,12 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         recalculate()
     }
 
+    fun reset() {
+        updateOfficeDays(0)
+        updateWorkingDays(0)
+        recalculate()
+    }
+
     private fun recalculate() {
         setDaysLeft()
         setPercentageFulfillment()
