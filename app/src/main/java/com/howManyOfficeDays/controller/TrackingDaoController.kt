@@ -10,6 +10,7 @@ import com.howManyOfficeDays.greendao.DaoSession
 import com.howManyOfficeDays.greendao.TrackingModelDao
 import com.howManyOfficeDays.greendao.TrackingModel
 import kotlin.math.ceil
+import kotlin.math.round
 
 class TrackingDaoController(private val mDaoSession: DaoSession, private val view: View) {
 
@@ -83,9 +84,9 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
     private fun setPercentageArchived(percentageArchived: Long) {
         goalTextView.text = "$percentageArchived%"
         if (percentageArchived < trackingModel.percentageGoal) {
-            view.setBackgroundColor(Color.RED) // If percentage is less than the goal, make the background red
+            goalTextView.setBackgroundColor(Color.RED) // If percentage is less than the goal, make the background red
         } else {
-            view.setBackgroundColor(Color.GREEN) // If percentage is greater than or equal to the goal, make it green
+            goalTextView.setBackgroundColor(Color.GREEN) // If percentage is greater than or equal to the goal, make it green
         }
     }
 
@@ -173,12 +174,19 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
     fun reset() {
         updateOfficeDays(0)
         updateWorkingDays(0)
+        trackingModel.daysLeft = 0
+        trackingModel.percentageGoal = 0
+        trackingModel.officeDaysLeft = 0
+        trackingModelDao.save(trackingModel)
         recalculate()
     }
 
     private fun recalculate() {
-        setDaysLeft()
-        setPercentageFulfillment()
+        try {
+            setDaysLeft()
+            setPercentageFulfillment()
+        } catch (_: Exception) {
+        }
     }
 
     private fun setDaysLeft() {
@@ -192,9 +200,10 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
 
     private fun setPercentageFulfillment() {
         val percentage =
-            (trackingModel.officeDays.toLong() / trackingModel.workingDays.toLong()) * 100
-        setPercentageArchived(percentage)
-        trackingModel.percentageArchived = percentage
+            (trackingModel.officeDays.toDouble() / trackingModel.workingDays.toDouble()) * 100
+        val percentageRounded = round(percentage).toLong()
+        setPercentageArchived(percentageRounded)
+        trackingModel.percentageArchived = percentageRounded
         trackingModelDao.save(trackingModel)
     }
 

@@ -3,6 +3,7 @@ package com.howManyOfficeDays
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -72,59 +73,38 @@ class MainActivity : AppCompatActivity() {
         reducePercentageBtn.setOnClickListener { trackingDaoController.reducePercentageGoal() }
         resetBtn.setOnClickListener { trackingDaoController.reset() }
 
-        editOfficeDays.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                charSequence: CharSequence?, start: Int, count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                charSequence: CharSequence?, start: Int, before: Int, count: Int
-            ) {
-            }
-
-            override fun afterTextChanged(editable: Editable?) {
+        editOfficeDays.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 val inputText = editOfficeDays.text.toString()
                 val number: Int = inputText.toIntOrNull() ?: 0
                 trackingDaoController.updateOfficeDays(number)
+                true
+            } else {
+                false
             }
-        })
+        }
 
-        editWorkingDays.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                charSequence: CharSequence?, start: Int, count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                charSequence: CharSequence?, start: Int, before: Int, count: Int
-            ) {
-            }
-
-            override fun afterTextChanged(editable: Editable?) {
+        editWorkingDays.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 val inputText = editWorkingDays.text.toString()
                 val number: Int = inputText.toIntOrNull() ?: 0
                 trackingDaoController.updateWorkingDays(number)
+                true
+            } else {
+                false
             }
-        })
+        }
 
-        editPercentage.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                charSequence: CharSequence?, start: Int, count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                charSequence: CharSequence?, start: Int, before: Int, count: Int
-            ) {
-            }
-
-            override fun afterTextChanged(editable: Editable?) {
+        editPercentage.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 val inputText = editPercentage.text.toString()
                 val number: Int = inputText.toIntOrNull() ?: 0
                 trackingDaoController.updatePercentageGoal(number)
+                true
+            } else {
+                false
             }
-        })
+        }
 
     }
 
