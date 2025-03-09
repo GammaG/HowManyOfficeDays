@@ -6,4 +6,17 @@
     <string name="min_1_00">-1.00</string>
     <string name="min_0_15">-0.15</string>
     <string name="min_0_05">-0.05</string>
+    <string name="goal_archivement">Goal Archivement</string>
+    <string name="percentage_goal">Percentage Goal</string>
+    <string name="days_in_office">Days in Office</string>
+    <string name="working_days_this_month">Working Days this month</string>
+    <string name="minus">-</string>
+    <string name="minus2">-</string>
+    <string name="minus3">-</string>
+    <string name="_0">0</string>
+    <string name="_00">0</string>
+    <string name="_000">0</string>
+    <string name="plus">+</string>
+    <string name="plus2">+</string>
+    <string name="plus3">+</string>
 </resources>

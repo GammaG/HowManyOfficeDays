@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#454545"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -24,95 +25,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#575757"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/addHourButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#6C6868"
-                android:breakStrategy="high_quality"
-                android:text="@string/plus_1_00"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/reduceHourButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#6C6868"
-                android:text="@string/min_1_00"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+            android:orientation="horizontal" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/addQuarterButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#6C6868"
-                android:text="@string/plus_0_15"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/reduceQuarterButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#6C6868"
-                android:text="@string/min_0_15"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/addFiveMinutesButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#6C6868"
-                android:text="@string/plus_0_05"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/reduceFiveMinutesButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#6C6868"
-                android:text="@string/min_0_05"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:background="#767575"
+            android:orientation="horizontal"
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,21 +40,200 @@
             android:orientation="vertical"
             android:padding="30dp">
 
-            <EditText
-                android:id="@+id/timeEditText"
+            <TextView
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:inputType="time"
+                android:text="@string/days_in_office"
                 android:textAlignment="center"
-                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                tools:text="00:00"
-                android:orientation="vertical"
-                tools:ignore="LabelFor" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <Button
+                        android:id="@+id/addOfficeDayBtn"
+                        android:layout_width="76dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/plus3"
+                        android:textStyle="bold"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/editOfficeDays"
+                        android:layout_width="192dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:text="@string/_000"
+                        android:textAlignment="center"
+                        android:textColor="#FAF7F7"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
+
+                    <Button
+                        android:id="@+id/reduceOfficeDayBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:width="20dp"
+                        android:text="@string/minus3"
+                        android:textStyle="bold"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/goal_archivement"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/daysLeftTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/goalTextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#F85252"
+                    android:textAlignment="center"
+                    android:textColor="#FDFDFD"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/working_days_this_month"
+                android:textAlignment="center"
+                android:textColor="#FFFEFE"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/addWorkingDayBtn"
+                    android:layout_width="76dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plus"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editWorkingDays"
+                    android:layout_width="192dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:inputType="number"
+                    android:text="@string/_0"
+                    android:textAlignment="center"
+                    android:textColor="#FAF7F7"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    tools:ignore="LabelFor" />
+
+                <Button
+                    android:id="@+id/reduceWorkingDayBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:width="20dp"
+                    android:text="@string/minus"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/percentage_goal"
+                android:textAlignment="center"
+                android:textColor="#FBFBFB"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="71dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <Button
+                        android:id="@+id/addPercentageBtn"
+                        android:layout_width="76dp"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:text="@string/plus2"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editPercentage"
+                        android:layout_width="192dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:text="@string/_00"
+                        android:textAlignment="center"
+                        android:textColor="#FAF7F7"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        tools:ignore="LabelFor" />
+
+                    <Button
+                        android:id="@+id/reducePercentage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:width="20dp"
+                        android:text="@string/minus2"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

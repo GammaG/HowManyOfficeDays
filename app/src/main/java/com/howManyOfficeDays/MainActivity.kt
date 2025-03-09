@@ -25,19 +25,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initializeUIElements()
-        setUpGreenDaoSession()
-        setUpController()
+       // initializeUIElements()
+       // setUpGreenDaoSession()
+       // setUpController()
     }
 
     private fun initializeUIElements() {
-        timeEditText = findViewById(R.id.timeEditText)
-        addHourButton = findViewById(R.id.addHourButton)
-        reduceHourButton = findViewById(R.id.reduceHourButton)
-        addQuarterButton = findViewById(R.id.addQuarterButton)
-        reduceQuarterButton = findViewById(R.id.reduceQuarterButton)
-        reduceFiveMinutesButton = findViewById(R.id.reduceFiveMinutesButton)
-        addFiveMinutesButton = findViewById(R.id.addFiveMinutesButton)
+       // timeEditText = findViewById(R.id.timeEditText)
+        // addHourButton = findViewById(R.id.addHourButton)
+        // reduceHourButton = findViewById(R.id.reduceHourButton)
+        // addQuarterButton = findViewById(R.id.addQuarterButton)
+        //reduceQuarterButton = findViewById(R.id.reduceQuarterButton)
+        //reduceFiveMinutesButton = findViewById(R.id.reduceFiveMinutesButton)
+        //addFiveMinutesButton = findViewById(R.id.addFiveMinutesButton)
     }
 
     private fun setUpGreenDaoSession() {
