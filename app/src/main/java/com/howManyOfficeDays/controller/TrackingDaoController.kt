@@ -1,6 +1,7 @@
 package com.howManyOfficeDays.controller
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -36,6 +37,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         } else {
             trackingModel = TrackingModel()
             trackingModel.daysLeft = 0
+            trackingModel.officeDaysLeft = 0
             trackingModel.officeDays = 0
             trackingModel.workingDays = 0
             trackingModel.percentageGoal = 0
@@ -80,6 +82,11 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
     @SuppressLint("SetTextI18n")
     private fun setPercentageArchived(percentageArchived: Long) {
         goalTextView.text = "$percentageArchived%"
+        if (percentageArchived < trackingModel.percentageGoal) {
+            view.setBackgroundColor(Color.RED) // If percentage is less than the goal, make the background red
+        } else {
+            view.setBackgroundColor(Color.GREEN) // If percentage is greater than or equal to the goal, make it green
+        }
     }
 
     fun updateOfficeDays(officeDays: Int) {
@@ -90,6 +97,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         }
         setOfficeDays(trackingModel.officeDays)
         trackingModelDao.save(trackingModel)
+        recalculate()
     }
 
     fun reduceOfficeDay() {
@@ -97,6 +105,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
             trackingModel.officeDays--
             trackingModelDao.save(trackingModel)
             setOfficeDays(trackingModel.officeDays)
+            recalculate()
         }
     }
 
@@ -104,6 +113,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         trackingModel.officeDays++
         trackingModelDao.save(trackingModel)
         setOfficeDays(trackingModel.officeDays)
+        recalculate()
     }
 
     fun updateWorkingDays(workingDays: Int) {
@@ -114,6 +124,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         }
         setWorkingDays(trackingModel.workingDays)
         trackingModelDao.save(trackingModel)
+        recalculate()
     }
 
     fun reduceWorkingDay() {
@@ -121,6 +132,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
             trackingModel.workingDays--
             trackingModelDao.save(trackingModel)
             setWorkingDays(trackingModel.workingDays)
+            recalculate()
         }
     }
 
@@ -128,6 +140,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         trackingModel.workingDays++
         trackingModelDao.save(trackingModel)
         setWorkingDays(trackingModel.workingDays)
+        recalculate()
     }
 
     fun updatePercentageGoal(percentageGoal: Int) {
@@ -138,6 +151,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         }
         setPercentageGoal(trackingModel.percentageGoal)
         trackingModelDao.save(trackingModel)
+        recalculate()
     }
 
     fun reducePercentageGoal() {
@@ -145,6 +159,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
             trackingModel.percentageGoal--
             trackingModelDao.save(trackingModel)
             setPercentageGoal(trackingModel.percentageGoal)
+            recalculate()
         }
     }
 
@@ -152,17 +167,29 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         trackingModel.percentageGoal++
         trackingModelDao.save(trackingModel)
         setPercentageGoal(trackingModel.percentageGoal)
+        recalculate()
+    }
+
+    private fun recalculate() {
+        setDaysLeft()
+        setPercentageFulfillment()
     }
 
     private fun setDaysLeft() {
         val neededOfficeDays =
             (trackingModel.workingDays.toDouble() / 100) * trackingModel.percentageGoal.toDouble()
         val roundedUpValue = ceil(neededOfficeDays).toInt()
-        setDaysLeft(roundedUpValue)
+        trackingModel.officeDaysLeft = roundedUpValue
+        setDaysLeft(trackingModel.officeDaysLeft - trackingModel.officeDays)
+        trackingModelDao.save(trackingModel)
     }
 
-    private fun setPercentageLeft() {
-
+    private fun setPercentageFulfillment() {
+        val percentage =
+            (trackingModel.officeDays.toLong() / trackingModel.workingDays.toLong()) * 100
+        setPercentageArchived(percentage)
+        trackingModel.percentageArchived = percentage
+        trackingModelDao.save(trackingModel)
     }
 
 }
