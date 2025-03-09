@@ -1,29 +1,26 @@
 package com.howManyOfficeDays
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.howManyOfficeDays.controller.TrackingDaoController
 import com.howManyOfficeDays.greendao.DaoMaster
 import com.howManyOfficeDays.greendao.DaoSession
+
 
 class MainActivity : AppCompatActivity() {
 
     private var addOfficeDayBtn: Button? = null
-    private var editOfficeDays: EditText? = null
     private var reduceOfficeDayBtn: Button? = null
-    private var daysLeftTextView: TextView? = null
-    private var goalTextView: TextView? = null
     private var addWorkingDayBtn: Button? = null
-    private var editWorkingDays: EditText? = null
     private var reduceWorkingDayBtn: Button? = null
     private var addPercentageBtn: Button? = null
-    private var editPercentage: EditText? = null
-    private var reducePercentage: Button? = null
+    private var reducePercentageBtn: Button? = null
     private var resetBtn: Button? = null
 
-    private var mDaoSession: DaoSession? = null
+    private lateinit var mDaoSession: DaoSession
+    private lateinit var trackingDaoController: TrackingDaoController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,31 +32,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeUIElements() {
         addOfficeDayBtn = findViewById(R.id.addOfficeDayBtn)
-        editOfficeDays = findViewById(R.id.editOfficeDays)
         reduceOfficeDayBtn = findViewById(R.id.reduceOfficeDayBtn)
-        daysLeftTextView = findViewById(R.id.daysLeftTextView)
-        goalTextView = findViewById(R.id.goalTextview)
         addWorkingDayBtn = findViewById(R.id.addWorkingDayBtn)
-        editWorkingDays = findViewById(R.id.editWorkingDays)
         reduceWorkingDayBtn = findViewById(R.id.reduceWorkingDayBtn)
         addPercentageBtn = findViewById(R.id.addPercentageBtn)
-        editPercentage = findViewById(R.id.editPercentage)
-        reducePercentage = findViewById(R.id.reducePercentage)
+        reducePercentageBtn = findViewById(R.id.reducePercentageBtn)
         resetBtn = findViewById(R.id.resetBtn)
     }
 
     private fun setUpGreenDaoSession() {
-        try {
-            var mDaoSession = DaoMaster(
-                DaoMaster.DevOpenHelper(this, "officeDays.db").writableDb
-            ).newSession()
-        } catch (ignored: Exception) {
-        }
+        mDaoSession = DaoMaster(
+            DaoMaster.DevOpenHelper(this, "officeDays.db").writableDb
+        ).newSession()
     }
 
     private fun setUpController() {
-
+        val mainView = findViewById<View>(android.R.id.content) // Root view of the activity
+        trackingDaoController = TrackingDaoController(mDaoSession, mainView)
     }
-
-
 }
+
+

@@ -118,7 +118,7 @@
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -129,7 +129,7 @@
                     android:background="#F85252"
                     android:textAlignment="center"
                     android:textColor="#FDFDFD"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -223,7 +223,7 @@
                         tools:ignore="LabelFor" />
 
                     <Button
-                        android:id="@+id/reducePercentage"
+                        android:id="@+id/reducePercentageBtn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
