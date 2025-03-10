@@ -61,6 +61,7 @@ class TrackingDaoController(private val mDaoSession: DaoSession, private val vie
         setPercentageGoal(trackingModel.percentageGoal)
         setDaysLeft(trackingModel.daysLeft)
         setPercentageArchived(trackingModel.percentageArchived)
+        recalculate()
     }
 
     private fun setOfficeDays(officeDays: Int) {
